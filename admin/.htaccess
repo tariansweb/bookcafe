@@ -1,0 +1,22 @@
+# Protect admin directory
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /BookCafe/admin/
+
+    # Redirect /admin to login.php
+    RewriteRule ^$ login.php [L]
+</IfModule>
+
+# Prevent directory browsing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "^(README\.md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Error pages
+ErrorDocument 403 /BookCafe/admin/login.php
+ErrorDocument 404 /BookCafe/admin/login.php

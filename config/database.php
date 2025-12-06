@@ -5,10 +5,10 @@
  * Update these credentials with your AWS RDS instance details
  */
 
-define('DB_HOST', 'your-rds-endpoint.region.rds.amazonaws.com');
+define('DB_HOST', 'localhost');
 define('DB_NAME', 'bookcafe_db');
-define('DB_USER', 'your_username');
-define('DB_PASS', 'your_password');
+define('DB_USER', 'localuser');
+define('DB_PASS', 'BBCn3ws9o#');
 define('DB_PORT', '3306');
 define('DB_CHARSET', 'utf8mb4');
 
@@ -25,14 +25,14 @@ function getDBConnection(): ?PDO {
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
-            PDO::MYSQL_ATTR_SSL_CA       => null, // Add SSL cert path for production
-            PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false
+            // PDO::MYSQL_ATTR_SSL_CA       => null, // Add SSL cert path for production
+            // PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false
         ];
         
         return new PDO($dsn, DB_USER, DB_PASS, $options);
         
     } catch (PDOException $e) {
-        error_log("Database Connection Error: " . $e->getMessage());
+        die("Database Connection Error: " . $e->getMessage());
         return null;
     }
 }
